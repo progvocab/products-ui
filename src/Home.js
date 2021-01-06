@@ -7,16 +7,37 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "Home" ,
-       products:[ "Sony A5" , "Nikon D70","Canon C3"]
+       
+       products:[  ]
     };
   }
-
-   
+  /*static getDerivedStateFromProps(nextProps, prevState) {
+    // do things with nextProps.someProp and prevState.cachedSomeProp
+    return {
+      cachedSomeProp: nextProps.someProp,
+      // ... other derived state properties
+    };
+  }*/
+  componentDidMount() {
+    fetch(`http://localhost:8082/products/list/all`
+      ,{ 
+      method: 'get', 
+      headers: new Headers({
+         'test':'test'
+      }) }
+    )
+      .then(res => res.json())
+      .then(result => {
+        console.log(result);
+        this.setState({
+          products: result.resp
+        });
+      })
+  }
   
   render() {
   const ex2 = this.state.products.map(
-      (product) => <Product name={product} ></Product>
+      (product) => <Product name={product.productName} ></Product>
   );
    
   return ex2;

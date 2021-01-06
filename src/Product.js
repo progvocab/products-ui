@@ -12,7 +12,7 @@ class Product extends React.Component {
 
   }
 
-   
+ 
   
   render() {
     return   [ (<h1>Product {this.props.name}</h1>)   ] ;
